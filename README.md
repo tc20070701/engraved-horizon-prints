@@ -10,15 +10,30 @@
 
 ## 一键安装
 
-适用于 WorkBuddy、CodeBuddy、Claude Code 等支持 skill 机制的 AI 客户端。
+### 方式一：通用脚本（推荐，一次装遍所有客户端）
 
-### macOS / Linux
+本 skill 遵循 Claude Code 的 `SKILL.md` 事实标准，WorkBuddy / CodeBuddy / Claude Code 三个客户端目录通用。装好 Python 3 后运行：
+
+```bash
+python install.py          # 自动装到所有已识别的客户端目录
+python install.py --list   # 先看看会装到哪，不实际写入
+```
+
+### 方式二：按客户端手动装
+
+| 客户端 | 技能目录（用户级） |
+|---|---|
+| WorkBuddy | `~/.workbuddy/skills/engraved-horizon-prints` |
+| CodeBuddy Code | `~/.codebuddy/skills/engraved-horizon-prints` |
+| Claude Code | `~/.claude/skills/engraved-horizon-prints` |
+
+macOS / Linux 一条命令：
 
 ```bash
 git clone https://github.com/tc20070701/engraved-horizon-prints.git ~/.workbuddy/skills/engraved-horizon-prints
 ```
 
-### Windows（PowerShell）
+Windows（PowerShell）：
 
 ```powershell
 $skills = "$env:USERPROFILE\.workbuddy\skills"
@@ -29,7 +44,7 @@ Remove-Item "$skills\engraved-horizon-prints" -Recurse -Force -ErrorAction Silen
 Move-Item "$env:TEMP\engraved-horizon-prints-main" "$skills\engraved-horizon-prints"
 ```
 
-### 让 AI 帮你装（最省事，无需记命令）
+### 方式三：让 AI 帮你装（最省事，无需记命令）
 
 把下面这段整段复制，粘给你的 AI 助手：
 
@@ -40,6 +55,11 @@ Move-Item "$env:TEMP\engraved-horizon-prints-main" "$skills\engraved-horizon-pri
 > 若你的 AI 无法联网，用仓库里的 [`INSTALL_PROMPT.md`](INSTALL_PROMPT.md) —— 它把两个文件的全文嵌在提示词里，离线也能装。
 
 装完重启一下会话，让客户端重新扫描 skill 列表。
+
+### 兼容范围说明
+
+- ✅ 直接安装：WorkBuddy、CodeBuddy Code、Claude Code（三者共享 `SKILL.md` 格式）。
+- ⚠️ 无 skill 系统、不能安装、但可用提示词：ChatGPT、豆包、Kimi、即梦、Midjourney 等纯聊天/生图 App——把 `references/style-guide.md` 里的英文提示词段粘过去即可出图。
 
 ---
 
@@ -76,6 +96,7 @@ engraved-horizon-prints/
 ├── assets/
 │   └── sample.png              # 效果样图
 ├── INSTALL_PROMPT.md           # 自包含安装提示词（离线安装用）
+├── install.py                  # 通用安装脚本（一次装遍所有客户端）
 └── README.md
 ```
 
